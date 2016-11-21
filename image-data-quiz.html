@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>A title</title>
+</head>
+
+<body>
+    <canvas id="c" width="500" height="500"></canvas>
+    <script>
+        var c = document.querySelector("#c");
+        var ctx = c.getContext("2d");
+
+        // grabs 2D image data from context of map i.e. all pixels
+        // from top left to bottom right
+        var data = ctx.getImageData(0,0,400,400);
+
+        function paintGreen(imageData) {
+          // takes rgba data which is made up of four values per pixel
+          // and divides by 4 to calculate how many pixels there are
+          var numPixels = imageData.data.length / 4;
+          // loop over each pixel as this is now defined
+          for (var i=0; i < numPixels; i++) {
+            // check if it is divisible by 10 to get every 10th pixel
+            if (i % 10 === 0) {
+              // finds the first list item value (the r in r, g, b, a)
+              // +1 updates the value to 1 list item to the right of the start
+              // of the list items for the pixel, which is the green, g, value
+              imageData.data[i * 4 + 1] = 255;
+              // same again but for the a value
+              imageData.data[i * 4 + 3] = 255;
+            }
+          }
+          // Updates the canvas to write the new green pixel on the canvas
+          ctx.putImageData(imageData, 0, 0);
+        }
+      paintGreen(data); // this is executed straight after line 17
+
+    </script>
+</body>
+
+</html>

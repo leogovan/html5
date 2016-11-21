@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>A title</title>
+</head>
+
+<body>
+    <canvas id="c" width="500" height="500"></canvas>
+    <script>
+        var c = document.querySelector("#c");
+        var ctx = c.getContext("2d");
+
+        // 1st Example ----------------
+
+        //var image = new Image();
+
+        //image.onload = function(){
+        //console.log("Loaded image");
+        //ctx.drawImage(image, 0, 0, c.width, c.height);
+        //}
+
+        //image.src = "http://software.rubikscube.info/icube/icube.php?stickers=yyyyggygrrygryyrrryrgrrgggg&size=200";
+
+        // 2nd Example ----------------
+
+        //ctx.fillRect(100, 100, 100, 100);
+        //ctx.strokeRect(50, 50, 50, 50);
+
+        // 3rd Example ----------------
+
+        //ctx.fillStyle = "blue";
+        // Start at (0,0) and draw a 50px x 50px blue rectangle.
+        //ctx.fillRect(0, 0, 50, 50);
+        // Start at (0,0) and clear a 25px x 25px rectangle.
+        //ctx.clearRect(0, 0, 25, 25);
+
+        // 4th Example ----------------
+
+        //ctx.fillRect(100, 100, 100, 100);
+        //ctx.strokeRect(50, 50, 50, 50);
+
+        // Traces the lines where an imaginary pen might be
+        //ctx.beginPath(); // needs this to start
+        //ctx.moveTo(10, 10); // moves to a designated place on the canvas
+        //ctx.lineTo(50, 50); // traces first line
+        //ctx.lineTo(50, 10); // traces second line
+        //tx.lineTo(10, 10); // traces third line
+
+        // However, this won't do anything without a fill or stroke to draw a line
+        //ctx.fill(); // solid fill of the shape we just drew; or
+        //ctx.stroke(); // outline of the shape we just drew
+
+        // Drawing quiz ----------------
+
+        // Square
+
+        //var square = c.getContext("2d");
+
+        //square.beginPath();
+        //square.moveTo(50, 50);
+        //square.lineTo(150, 50);
+        //square.lineTo(150, 150);
+        //square.lineTo(50, 150);
+        //square.lineTo(50, 50);
+        //square.stroke();
+        // Triangle
+
+        //var triangle = c.getContext("2d");
+
+        //triangle.beginPath();
+        //triangle.moveTo(75, 75);
+        //triangle.lineTo(125, 75);
+        //triangle.lineTo(125, 125);
+        //triangle.lineTo(75, 75);
+        //triangle.fill();
+
+        // Drawing text quiz ----------------
+
+        ctx.fillStyle = "white"
+        ctx.font = "36pt Impact";
+        ctx.textAlign = "center";
+        ctx.fillText("CANVAS MEMES!", c.width / 2, 200);
+
+        ctx.strokeStyle = "black"
+        ctx.lineWidth = 3;
+        ctx.strokeText("CANVAS MEMES!", c.width / 2, 200);
+    </script>
+</body>
+
+</html>

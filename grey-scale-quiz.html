@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>A title</title>
+</head>
+
+<body>
+    <canvas id="c" width="500" height="500"></canvas>
+    <script>
+        var c = document.querySelector("#c");
+        var ctx = c.getContext("2d");
+
+        var image = new Image();
+
+        image.onload = function(){
+        console.log("Loaded image");
+        ctx.drawImage(image, 0, 0, c.width, c.height);
+        }
+
+        image.src = "http://cdn.loyensloeff.com/media/4785/pelv-300-dpi-500-x-500.jpg";
+
+        var data = ctx.getImageData(0,0,500,500);
+
+        var pixel = data.data;
+
+        console.log(pixel);
+
+        function greyScaleImage(imageData) {
+          var numPixels = pixel.length / 4;
+
+          for (var i=0; i < numPixels; i++) {
+              var redPixel = pixel[i];
+              var greenPixel = pixel[i + 1];
+              var bluePixel = pixel[i + 2];
+
+              var greyScale = redPixel * .3 + greenPixel * .59 + bluePixel * .11;
+
+              pixel[i] = greyScale;
+              pixel[i + 1] = greyScale;
+              pixel[i + 2] = greyScale;
+
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+        }
+      greyScaleImage(data);
+
+    </script>
+</body>
+
+</html>
