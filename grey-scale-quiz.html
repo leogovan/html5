@@ -7,45 +7,46 @@
 </head>
 
 <body>
-    <canvas id="c" width="500" height="500"></canvas>
+    <canvas width="500" height="500"></canvas>
     <script>
-        var c = document.querySelector("#c");
-        var ctx = c.getContext("2d");
+        var canvas = document.querySelector("canvas");
+        var ctx = canvas.getContext("2d");
 
         var image = new Image();
 
         image.onload = function(){
-        console.log("Loaded image");
-        ctx.drawImage(image, 0, 0, c.width, c.height);
+        ctx.drawImage(image, 0, 0);
+        greyScaleImage();
         }
 
-        image.src = "http://cdn.loyensloeff.com/media/4785/pelv-300-dpi-500-x-500.jpg";
+        image.src = "pitshark.jpg";
 
-        var data = ctx.getImageData(0,0,500,500);
-
-        var pixel = data.data;
-
-        console.log(pixel);
-
-        function greyScaleImage(imageData) {
-          var numPixels = pixel.length / 4;
-
+        function greyScaleImage() {
+          var photoImageData = ctx.getImageData(0,0,500,500);
+          var numPixels = photoImageData.data.length / 4;
+          //console.log(photoImageData.data);
           for (var i=0; i < numPixels; i++) {
-              var redPixel = pixel[i];
-              var greenPixel = pixel[i + 1];
-              var bluePixel = pixel[i + 2];
+              var redPixel = photoImageData.data[i * 4 + 0];
+              var greenPixel = photoImageData.data[i * 4 + 1];
+              var bluePixel = photoImageData.data[i * 4 + 2];
+              var alphaPixel = photoImageData.data[i * 4 + 3];
 
-              var greyScale = redPixel * .3 + greenPixel * .59 + bluePixel * .11;
+              var greyScale = (redPixel * .3) + (greenPixel * .59) + (bluePixel * .11);
 
-              pixel[i] = greyScale;
-              pixel[i + 1] = greyScale;
-              pixel[i + 2] = greyScale;
+              photoImageData.data[i * 4 + 0] = greyScale.redPixel;
+              photoImageData.data[i * 4 + 1] = greyScale.greenPixel;
+              photoImageData.data[i * 4 + 2] = greyScale.bluePixel;
+              photoImageData.data[i * 4 + 3] = alphaPixel;
+              console.log(alphaPixel, "I am alpha");
+              //console.log(redPixel, "I am red");
+              //console.log(greenPixel, "I am green");
+              //console.log(bluePixel, "I am blue");
 
           }
 
-          ctx.putImageData(imageData, 0, 0);
+          ctx.putImageData(photoImageData, 0, 0);
         }
-      greyScaleImage(data);
+
 
     </script>
 </body>
